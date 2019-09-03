@@ -1,0 +1,39 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+// Bootstrap use 3.4.1
+@import '~bootstrap/dist/css/bootstrap.css';
+
+// Node-wave
+@import '~node-waves/dist/waves.css';
+
+// Animate-css
+@import '~animate.css/animate.css';
+
+// Multi Select
+@import './theme/multi-selecr.css';
+
+// Bootstrap Material Datetime Picker Css
+@import './theme/bootstrap-material-datetimepicker.css';
+
+// Bootstrap DatePicker Css
+@import '~bootstrap-datepicker/dist/css/bootstrap-datepicker.css';
+
+//Datatable
+@import '~datatables.net-bs/css/dataTables.bootstrap.css';
+@import '~datatables.net-buttons-bs/css/buttons.bootstrap.css';
+
+// WAitMe
+@import './theme/waitMe.css';
+
+// Bpptstrap select
+// @import '~bootstrap-select/dist/css/bootstrap-select.css';
+
+// Custom style
+@import './theme/style.css';
+
+// Theme style
+// @import './theme/theme-red.css';
+// @import './theme/all-themes.css';
+@import './theme/theme-blue.css';
