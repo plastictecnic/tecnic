@@ -72,8 +72,9 @@ Users - Plastictecknic Sdn. Bhd.
                                     <tr>
                                         <td>{{$user->name}}</td>
                                         <td>{{$user->email}}</td>
-                                        <td>{{$user->created_at->format('d/m/y H:i')}}</td><td>
-                                            @foreach ($user->role as $role)
+                                        <td>{{$user->created_at->format('d/m/y H:i')}}</td>
+                                        <td>
+                                            @foreach ($user->roles as $role)
                                                 {{$role->name}}
                                             @endforeach
                                         </td>

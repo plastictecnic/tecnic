@@ -73,9 +73,4 @@ class UserController extends Controller
     {
         //
     }
-
-    // Show roles
-    public function showRoles(){
-        return view('admin.role.index')->with('counter', 1);
-    }
 }

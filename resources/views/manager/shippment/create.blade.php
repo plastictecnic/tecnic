@@ -110,8 +110,8 @@ Create Shippment - Plastictecknic Sdn. Bhd.
                                     Choose pallets
                                 </div>
                                 <select required name="pallet_id[]" id="optgroup" class="ms" multiple="multiple">
-                                    @foreach (\App\Pallet::where('status', 'created')->orWhere('status', 'returned')->get() as $pallet)
-                                        <option value="{{$pallet->id}}">{{ $pallet->sn }}</option>
+                                    @foreach (\App\Pallet::where('status', 'CREATED|IN')->orWhere('status', 'IN')->get() as $pallet)
+                                        <option value="{{$pallet->id}}">{{ $pallet->rfid }} - {{ $pallet->color }} | Status: {{ $pallet->status }}</option>
                                     @endforeach
                                 </select>
                             </div>

@@ -21,16 +21,14 @@ class PalletController extends Controller
     public function store(Request $request){
 
         $request->validate([
-            'rfid' => 'required|unique:rfids',
+            'rfid' => 'required|digits:8|unique:pallets',
             'location_id' => 'required',
             'color' => 'required'
         ]);
 
-        $rfid = str_pad($request->rfid, 8, 0, STR_PAD_LEFT);
-
         $location = Location::find($request->location_id);
         $location->pallets()->create([
-            'rfid' => $rfid,
+            'rfid' => $request->rfid,
             'status' => 'CREATED|IN',
             'color' => $request->color
         ]);

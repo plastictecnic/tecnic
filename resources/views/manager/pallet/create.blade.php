@@ -64,7 +64,7 @@ Create New Pallet - Plastictecknic Sdn. Bhd.
                                         <i class="material-icons">redeem</i>
                                     </span>
                                     <div class="form-line">
-                                        <input id="color" type="text"
+                                        <input id="rfid" type="text" onfocusout="zeroLeadingRfid()"
                                         class="form-control @error('rfid') is-invalid @enderror" name="rfid"
                                         placeholder="RFID" required value="{{ old('rfid') }}"
                                         autocomplete="rfid">
@@ -113,18 +113,24 @@ Create New Pallet - Plastictecknic Sdn. Bhd.
 @section('custom-js')
 <script type="text/javascript">
     $(function () {
-            $('#sign_up').validate({
-                highlight: function (input) {
-                    $(input).parents('.form-line').addClass('error');
-                },
-                unhighlight: function (input) {
-                    $(input).parents('.form-line').removeClass('error');
-                },
-                errorPlacement: function (error, element) {
-                    $(element).parents('.input-group').append(error);
-                    $(element).parents('.form-group').append(error);
-                }
-            });
+        $('#sign_up').validate({
+            highlight: function (input) {
+                $(input).parents('.form-line').addClass('error');
+            },
+            unhighlight: function (input) {
+                $(input).parents('.form-line').removeClass('error');
+            },
+            errorPlacement: function (error, element) {
+                $(element).parents('.input-group').append(error);
+                $(element).parents('.form-group').append(error);
+            }
         });
+    });
+
+    // Custom masking function
+    function zeroLeadingRfid() {
+        var rfid = document.getElementById("rfid");
+        rfid.value = rfid.value.padStart(8,0);
+    }
 </script>
 @endsection

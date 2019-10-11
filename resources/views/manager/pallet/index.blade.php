@@ -52,7 +52,7 @@ Pallets - Plastictecknic Sdn. Bhd.
                                     <th>Color</th>
                                     <th>Location</th>
                                     <th>Status</th>
-                                    <th>Action</th>
+                                    <th class="align-center">Action</th>
                                 </tr>
                             </thead>
                             <tfoot>
@@ -71,8 +71,8 @@ Pallets - Plastictecknic Sdn. Bhd.
                                     <td>{{$pallet->color}}</td>
                                     <td>{{$pallet->location->code}}</td>
                                     <td>{{$pallet->status}}</td>
-                                    <td><a href="edit">Edit</a> | <a target="_blank" href="{{route('print-barcode', ['code' => $pallet->rfid])}}">Print</a> |
-                                        <a target="_blank" href="{{route('print-barcode-2d', ['code' => $pallet->rfid])}}">Print 2D</a></td>
+                                    <td class="align-center"><a class="btn btn-sm btn-info" target="_blank" title="Barcode" href="{{route('print-barcode', ['code' => $pallet->rfid])}}"><i class="material-icons">insert_chart</i> Barcode</a> &nbsp;
+                                        <a class="btn btn-sm btn-warning" target="_blank" title="QR Code" href="{{route('print-barcode-2d', ['code' => $pallet->rfid])}}"><i class="material-icons">widgets</i> QR Code</a></td>
                                 </tr>
                                 @endforeach
                             </tbody>

@@ -60,9 +60,6 @@
                     <li class="{{ Route::is('organization*') ? 'active' : '' }}">
                         <a href="{{route('organization.index')}}">Organization</a>
                     </li>
-                    <li class="{{ Route::is('admin-show-roles') ? 'active' : '' }}">
-                        <a href="{{route('admin-show-roles')}}">Roles</a>
-                    </li>
                 </ul>
             </li>
             <li class="{{ Route::is('report*') ? 'active' : '' }}">
