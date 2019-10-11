@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
         $this->createUserRole('admin', 'ershadahamed89@gmail.com', 'staff');
         $this->createUserRole('customer', 'fakemanyo@outlook.com', 'customer');
         $this->createUserRole('manager', 'ershadahamed@ymail.com', 'supplier');
-        $this->createUserRole('picker', 'carjunk9@hotmail.com', 'postman');
+        $this->createUserRole('driver', 'carjunk9@hotmail.com', 'driver');
     }
 
     private function createUserRole ($role, $email, $type){

@@ -25,13 +25,13 @@ class LocationTableSeeder extends Seeder
         ]);
 
         Location::create([
-            'code' => 'SHIP',
+            'code' => 'IN TRANSIT',
             'name' => 'Shipping',
             'description' => 'Process of shipping to customer or back to wherehouse'
         ]);
-        
+
         Location::create([
-            'code' => 'CUST',
+            'code' => 'CUST PREMIS',
             'name' => 'Customer Premis',
             'description' => 'Locatoin of an item at customer premises'
         ]);

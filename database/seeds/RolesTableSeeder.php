@@ -29,7 +29,7 @@ class RolesTableSeeder extends Seeder
         ]);
 
         Role::create([
-            'name' => 'picker',
+            'name' => 'driver',
             'description' => 'Loading and unloading into lorry or loading bay'
         ]);
 

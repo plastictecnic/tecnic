@@ -14,7 +14,7 @@ class OrganizationTableSeeder extends Seeder
     {
         // Staff
         Organization::create([
-            'company_name' => 'Plastictecnic Sdn. Bhd.', 
+            'company_name' => 'Plastictecnic Sdn. Bhd.',
             'company_reg' => '30481-V',
             'type' => 'staff', // staff|customer|supplier|postman
             'address' => 'Lot 1, Jalan P/2A, Kawasan Perusahaan Pkt 1',
@@ -55,7 +55,7 @@ class OrganizationTableSeeder extends Seeder
         Organization::create([
             'company_name' => 'Plastictecnic Sdn. Bhd.',
             'company_reg' => '30481-V',
-            'type' => 'postman', // staff|customer|supplier|postman
+            'type' => 'driver', // staff|customer|supplier|postman
             'address' => 'Lot 1, Jalan P/2A, Kawasan Perusahaan Pkt 1',
             'postcode' => '43650',
             'state' => 'Selangor',
