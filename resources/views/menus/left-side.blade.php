@@ -20,7 +20,6 @@
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
-
                     </li>
                 </ul>
             </div>
@@ -103,7 +102,7 @@
             &copy; {{ Carbon\carbon::now()->year }} <a href="javascript:void(0);">Plastictecnic (M) Sdn Bhd</a>.
         </div>
         <div class="version">
-            <b>Version: </b> 1.0.1
+            <b>Version: </b> 1.1.2
         </div>
     </div>
     <!-- #Footer -->

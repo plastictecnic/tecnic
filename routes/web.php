@@ -34,58 +34,42 @@ Route::middleware(['auth'])->group(function(){
     Route::get('text', 'ReportController@test')->name('test');
 
     // Admin only
-    Route::middleware(['admin'])->group(function(){
-        // User Management
-        // List all user
-        Route::get('admin/all-user', 'UserController@index')->name('admin-xall-user');
-        // Add user
-        Route::get('admin/add-user', 'UserController@create')->name('admin-xadd-user');
-        // adding user will go to register controller
 
-        // Role Management
-        // Show roles
-        Route::get('admin/show-roles', 'UserController@showRoles')->name('admin-show-roles');
+    // User Management
+    // List all user
+    Route::get('admin/all-user', 'UserController@index')->name('admin-xall-user');
+    // Add user
+    Route::get('admin/add-user', 'UserController@create')->name('admin-xadd-user');
+    // adding user will go to register controller
 
-        // Organization Management
-        Route::resource('organization', 'OrganizationController');
+    // Role Management
+    // Show roles
+    Route::get('admin/show-roles', 'UserController@showRoles')->name('admin-show-roles');
 
-        // Location
-        Route::resource('location', 'LocationController');
+    // Organization Management
+    Route::resource('organization', 'OrganizationController');
 
-        // // Vehicle
-        Route::resource('vehicle', 'VehichleController');
+    // Location
+    Route::resource('location', 'LocationController');
 
-        // Shipment Management
-        Route::get('shippment/all', 'ShippmentController@index')->name('shippment-all');
-        Route::get('shippment/create', 'ShippmentController@create')->name('shippment-create');
-        Route::post('shippment/store', 'ShippmentController@store')->name('shippment-store');
-        Route::get('/track/{id}', 'ShippmentController@track')->name('track');
-        Route::post('/track', 'ShippmentController@track_update')->name('track_update');
-        Route::post('/verify', 'ShippmentController@verify')->name('verify');
+    // // Vehicle
+    Route::resource('vehicle', 'VehichleController');
 
-        // Pallet Management
-        Route::get('pallet/all', 'PalletController@index')->name('pallet-all');
-        Route::get('pallet/create', 'PalletController@create')->name('pallet-create');
-        Route::post('pallet/store', 'PalletController@store')->name('pallet-store');
-        Route::get('print-barcode/{code}', 'PalletController@print')->name('print-barcode');
-        Route::get('print-barcode-2d/{code}', 'PalletController@print2D')->name('print-barcode-2d');
-        Route::post('find-pallet', 'PalletController@find_pallet')->name('find-pallet');
-    });
+    // Shipment Management
+    Route::get('shippment/all', 'ShippmentController@index')->name('shippment-all');
+    Route::get('shippment/create', 'ShippmentController@create')->name('shippment-create');
+    Route::post('shippment/store', 'ShippmentController@store')->name('shippment-store');
+    Route::get('/track/{id}', 'ShippmentController@track')->name('track');
+    Route::post('/track', 'ShippmentController@track_update')->name('track_update');
+    Route::post('/verify', 'ShippmentController@verify')->name('verify');
 
-    // Manager only
-    Route::middleware(['manager'])->group(function () {
-        // Report Management
-    });
-
-    // Customer only
-    Route::group(['middleware' => ['customer']], function () {
-        // Customer Return
-    });
-
-    // Picker
-    Route::group(['middleware' => ['picker']], function () {
-        // Update movement
-    });
+    // Pallet Management
+    Route::get('pallet/all', 'PalletController@index')->name('pallet-all');
+    Route::get('pallet/create', 'PalletController@create')->name('pallet-create');
+    Route::post('pallet/store', 'PalletController@store')->name('pallet-store');
+    Route::get('print-barcode/{code}', 'PalletController@print')->name('print-barcode');
+    Route::get('print-barcode-2d/{code}', 'PalletController@print2D')->name('print-barcode-2d');
+    Route::post('find-pallet', 'PalletController@find_pallet')->name('find-pallet');
 });
 
 

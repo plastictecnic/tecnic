@@ -15,6 +15,13 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+
+        $this->call([
+            OrganizationTableSeeder::class,
+            LocationTableSeeder::class,
+            VehicleTableSeeder::class,
+        ]);
+
         $this->createUserRole('admin', 'ershadahamed89@gmail.com', 'staff');
         $this->createUserRole('customer', 'fakemanyo@outlook.com', 'customer');
         $this->createUserRole('manager', 'ershadahamed@ymail.com', 'supplier');
