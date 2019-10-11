@@ -48,22 +48,18 @@ Pallets - Plastictecknic Sdn. Bhd.
                         <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                             <thead>
                                 <tr>
-                                    <th>Code / SN</th>
+                                    <th>RFID</th>
                                     <th>Color</th>
                                     <th>Location</th>
-                                    <th>Created By</th>
-                                    <th>Created At</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
-                                    <th>Code / SN</th>
+                                    <th>RFID</th>
                                     <th>Color</th>
                                     <th>Location</th>
-                                    <th>Created By</th>
-                                    <th>Created At</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -71,14 +67,12 @@ Pallets - Plastictecknic Sdn. Bhd.
                             <tbody>
                                 @foreach ($pallets as $pallet)
                                 <tr>
-                                    <td>{{$pallet->sn}}</td>
+                                    <td>{{$pallet->rfid}}</td>
                                     <td>{{$pallet->color}}</td>
                                     <td>{{$pallet->location->code}}</td>
-                                    <td>{{mb_strimwidth($pallet->user->name, 0, 20, '...')}}</td>
-                                    <td>{{$pallet->created_at->format('d/m/y H:i')}}</td>
                                     <td>{{$pallet->status}}</td>
-                                    <td><a href="edit">Edit</a> | <a target="_blank" href="{{route('print-barcode', ['code' => $pallet->sn])}}">Print</a> | 
-                                        <a target="_blank" href="{{route('print-barcode-2d', ['code' => $pallet->sn])}}">Print 2D</a></td>
+                                    <td><a href="edit">Edit</a> | <a target="_blank" href="{{route('print-barcode', ['code' => $pallet->rfid])}}">Print</a> |
+                                        <a target="_blank" href="{{route('print-barcode-2d', ['code' => $pallet->rfid])}}">Print 2D</a></td>
                                 </tr>
                                 @endforeach
                             </tbody>

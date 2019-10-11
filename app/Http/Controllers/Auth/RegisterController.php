@@ -10,6 +10,7 @@ use App\Organization;
 use App\Profile;
 use Notification;
 use App\Notifications\SendUserPassword;
+use Spatie\Permission\Models\Role;
 
 class RegisterController extends Controller
 {
@@ -84,8 +85,10 @@ class RegisterController extends Controller
             'gender' => 'O',
             'picture' => 'users/user.png'
         ]);
+
         // Attaching role
-        $user->role()->attach($data['user_type']);
+        //$user->role()->attach($data['user_type']);
+        $user->assignRole($data['user_type']);
 
         // Send password email
         Notification::route('mail', $user->email)->notify(new SendUserPassword($randomString));

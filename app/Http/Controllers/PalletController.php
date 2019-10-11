@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Pallet;
-use Carbon\Carbon;
 use App\Location;
-use Auth;
 use DNS1D;
 use DNS2D;
 
@@ -22,24 +20,22 @@ class PalletController extends Controller
 
     public function store(Request $request){
 
-        $palletNo = \App\Pallet::whereDate('created_at', Carbon::today())->count() + 1;
-        $date = Carbon::today()->format('dmY');
-        $sn = 'P' . $date . str_pad($palletNo, 4, 0, STR_PAD_LEFT);
-
         $request->validate([
+            'rfid' => 'required|unique:rfids',
             'location_id' => 'required',
             'color' => 'required'
         ]);
 
+        $rfid = str_pad($request->rfid, 8, 0, STR_PAD_LEFT);
+
         $location = Location::find($request->location_id);
         $location->pallets()->create([
-            'sn' => $sn,
-            'status' => 'created',
-            'color' => $request->color,
-            'user_id' => Auth::user()->id
+            'rfid' => $rfid,
+            'status' => 'CREATED|IN',
+            'color' => $request->color
         ]);
 
-        return redirect()->back()->with('status', 'Pallet SN: ' . $sn . ' created successfuly');
+        return redirect()->back()->with('status', 'Pallet RFID: ' . $rfid . ' created successfuly');
     }
 
     public function print($code){
@@ -52,8 +48,8 @@ class PalletController extends Controller
     }
 
     public function find_pallet(Request $req){
-        $req->validate(['pallet_sn' => 'required']);
-        $pallet = Pallet::where('sn', $req->pallet_sn)->first();
+        $req->validate(['rfid' => 'required']);
+        $pallet = Pallet::where('rfid', $req->rfid)->first();
         return view('home')->with('pallet', $pallet);
     }
 }

@@ -122,7 +122,7 @@
                                             }}</td>
                                             <td>
                                                 @foreach ($pallet->shippments[0]->pallets as $palletr)
-                                                    <a href="#">{{$palletr->sn}}</a> <br>
+                                                    <a href="#">{{$palletr->rfid}}</a> <br>
                                                 @endforeach
                                             </td>
                                             <td>{{ $pallet->shippments->count() }}</td>

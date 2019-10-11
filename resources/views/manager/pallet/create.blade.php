@@ -6,8 +6,8 @@ Create New Pallet - Plastictecknic Sdn. Bhd.
 <div class="container-fluid">
     <div class="block-header">
         <h2>
-            ADD PALLET
-            <small>Adding new pallet</small>
+            ADD RFID
+            <small>Adding new RFID pallet</small>
         </h2>
     </div>
 
@@ -28,7 +28,7 @@ Create New Pallet - Plastictecknic Sdn. Bhd.
             <div class="card">
                 <div class="header">
                     <h2>
-                        Create new pallet
+                        Create new RFID pallet
                     </h2>
                     <ul class="header-dropdown m-r--5">
                         <li class="dropdown">
@@ -61,10 +61,21 @@ Create New Pallet - Plastictecknic Sdn. Bhd.
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                 <div class="input-group">
                                     <span class="input-group-addon">
+                                        <i class="material-icons">redeem</i>
+                                    </span>
+                                    <div class="form-line">
+                                        <input id="color" type="text"
+                                        class="form-control @error('rfid') is-invalid @enderror" name="rfid"
+                                        placeholder="RFID" required value="{{ old('rfid') }}"
+                                        autocomplete="rfid">
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
                                         <i class="material-icons">map</i>
                                     </span>
                                     <div class="form-line">
-                                        <select autofocus required name="location_id" class="form-control">
+                                        <select required name="location_id" class="form-control">
                                             <option value="">-- Please select location --</option>
                                             @foreach (\App\Location::all() as $location)
                                                 <option value="{{$location->id}}">{{$location->code .' - '. $location->name}}</option>

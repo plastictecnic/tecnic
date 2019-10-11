@@ -16,7 +16,7 @@ class OrganizationTableSeeder extends Seeder
         Organization::create([
             'company_name' => 'Plastictecnic Sdn. Bhd.',
             'company_reg' => '30481-V',
-            'type' => 'staff', // staff|customer|supplier|postman
+            'type' => 'staff',
             'address' => 'Lot 1, Jalan P/2A, Kawasan Perusahaan Pkt 1',
             'postcode' => '43650',
             'state' => 'Selangor',
@@ -27,35 +27,22 @@ class OrganizationTableSeeder extends Seeder
 
         // Customer
         Organization::create([
-            'company_name' => 'Plastictecnic Sdn. Bhd.',
-            'company_reg' => '30481-V',
-            'type' => 'customer', // staff|customer|supplier|postman
-            'address' => 'Lot 1, Jalan P/2A, Kawasan Perusahaan Pkt 1',
-            'postcode' => '43650',
+            'company_name' => 'Daikin Malaysia Sdn. Bhd.',
+            'company_reg' => '112531-W',
+            'type' => 'customer',
+            'address' => 'P.O.BOX 79, Lot 60334, PERSIARAN BUKIT RAHMAN PUTRA, 3, Taman Perindustrian, Bukit Rahman Putra',
+            'postcode' => '47000',
             'state' => 'Selangor',
-            'city' => 'Bandar Baru Bangi',
-            'fix_phone' => '0389256950',
+            'city' => 'Sungai Buloh',
+            'fix_phone' => '0361458600',
             'remark' => 'Internal Use'
         ]);
 
-        // supplier
+        // driver
         Organization::create([
             'company_name' => 'Plastictecnic Sdn. Bhd.',
             'company_reg' => '30481-V',
-            'type' => 'supplier', // staff|customer|supplier|postman
-            'address' => 'Lot 1, Jalan P/2A, Kawasan Perusahaan Pkt 1',
-            'postcode' => '43650',
-            'state' => 'Selangor',
-            'city' => 'Bandar Baru Bangi',
-            'fix_phone' => '0389256950',
-            'remark' => 'Internal Use'
-        ]);
-
-        // postman
-        Organization::create([
-            'company_name' => 'Plastictecnic Sdn. Bhd.',
-            'company_reg' => '30481-V',
-            'type' => 'driver', // staff|customer|supplier|postman
+            'type' => 'driver',
             'address' => 'Lot 1, Jalan P/2A, Kawasan Perusahaan Pkt 1',
             'postcode' => '43650',
             'state' => 'Selangor',

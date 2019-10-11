@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Pallet extends Model
 {
     protected $fillable = [
-        'sn', 'status', 'color', 'location_id', 'user_id'
+        'rfid', 'status', 'color', 'location_id',
     ];
 
     public function shippments(){
@@ -16,9 +16,5 @@ class Pallet extends Model
 
     public function location(){
         return $this->belongsTo('App\Location');
-    }
-
-    public function user(){
-        return $this->belongsTo('App\User');
     }
 }

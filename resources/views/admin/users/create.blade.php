@@ -44,7 +44,7 @@ Create New User - Plastictecknic Sdn. Bhd.
                 </div>
                 <div class="body">
                     <form id="sign_up" method="POST" action="{{ route('register') }}">
-                        @csrf                    
+                        @csrf
                         <div class="input-group">
                             @error('name')
                             <span class="invalid-feedback" role="alert">
@@ -59,7 +59,7 @@ Create New User - Plastictecknic Sdn. Bhd.
                                     placeholder="Full Name" required autofocus value="{{ old('name') }}" autocomplete="name">
                             </div>
                         </div>
-                    
+
                         <div class="input-group">
                             @error('email')
                             <span class="invalid-feedback" role="alert">
@@ -97,7 +97,7 @@ Create New User - Plastictecknic Sdn. Bhd.
                                 <select required name="user_type" class="form-control">
                                     <option value="">-- Please select user type --</option>
                                     @foreach ($roles as $role)
-                                        <option value="{{$role->id}}">{{$role->name}}</option>
+                                        <option value="{{$role->name}}">{{$role->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -132,5 +132,5 @@ Create New User - Plastictecknic Sdn. Bhd.
                 }
             });
         });
-    </script>    
+    </script>
 @endsection

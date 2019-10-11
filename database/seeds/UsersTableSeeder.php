@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Role;
-use App\User;
 use App\Organization;
 use App\Profile;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class UsersTableSeeder extends Seeder
 {
@@ -16,16 +16,29 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
 
+        // Create roles
+        $this->createRoles();
+
         $this->call([
             OrganizationTableSeeder::class,
             LocationTableSeeder::class,
             VehicleTableSeeder::class,
         ]);
 
-        $this->createUserRole('admin', 'ershadahamed89@gmail.com', 'staff');
-        $this->createUserRole('customer', 'fakemanyo@outlook.com', 'customer');
-        $this->createUserRole('manager', 'ershadahamed@ymail.com', 'supplier');
-        $this->createUserRole('driver', 'carjunk9@hotmail.com', 'driver');
+        // Create initial pallet
+        for($i = 1; $i <= 500; $i++){
+            DB::table('pallets')->insert([
+                'rfid' => str_pad($i, 8, 0, STR_PAD_LEFT),
+                'status' => 'CREATED|IN',
+                'color' => 'Gray',
+                'location_id' => 1
+            ]);
+        }
+
+        $this->createUserRole('admin', 'ershad.sa@tecnic.com', 'staff');
+        // $this->createUserRole('customer', 'fakemanyo@outlook.com', 'customer');
+        // $this->createUserRole('manager', 'ershadahamed@ymail.com', 'staff');
+        // $this->createUserRole('driver', 'carjunk9@hotmail.com', 'driver');
     }
 
     private function createUserRole ($role, $email, $type){
@@ -52,9 +65,26 @@ class UsersTableSeeder extends Seeder
         ]);
 
         // Attaching role
-        $roleId = Role::where('name', $role)->first();
-        $user->role()->attach($roleId);
+        $user->assignRole($role);
 
         return $user;
+    }
+
+    private function createRoles(){
+        Role::create([
+            'name' => 'admin'
+        ]);
+
+        Role::create([
+            'name' => 'manager'
+        ]);
+
+        Role::create([
+            'name' => 'driver'
+        ]);
+
+        Role::create([
+            'name' => 'customer'
+        ]);
     }
 }
