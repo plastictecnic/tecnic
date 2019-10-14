@@ -12,9 +12,7 @@
 */
 
 // No authentication
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@welcome');
 
 Auth::routes();
 Route::middleware(['auth'])->group(function(){

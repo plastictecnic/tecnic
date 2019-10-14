@@ -24,4 +24,8 @@ class HomeController extends Controller
     {
         return view('home')->with('pallet', null);
     }
+
+    public function welcome(){
+        return view('welcome');
+    }
 }
