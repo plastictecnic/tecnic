@@ -13,6 +13,13 @@ class VehicleTableSeeder extends Seeder
     public function run()
     {
         Vehicle::create([
+            'reg_number' => 'n/a',
+            'type' => 'car',
+            'driver_name' => 'n/a',
+            'hp' => 'n/a'
+        ]);
+
+        Vehicle::create([
             'reg_number' => 'BDX2365',
             'type' => 'car',
             'driver_name' => 'Ershad Ahamed',

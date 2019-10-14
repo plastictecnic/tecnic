@@ -83,7 +83,7 @@ Shippments - Plastictecknic Sdn. Bhd.
                                         }}</td>
                                         <td>
                                             @foreach ($shippment->pallets as $pallet)
-                                                <a href="#">{{$pallet->sn}}</a>
+                                                <a href="#">{{$pallet->rfid}}</a>
                                             @endforeach
                                         </td>
                                         <td><a href="{{ route('track', ['id' => $shippment->id]) }}">Update</a></td>

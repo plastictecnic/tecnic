@@ -176,7 +176,7 @@ Update Shippment - Plastictecknic Sdn. Bhd.
                                         }}</td>
                                         <td>
                                             @foreach ($shipment->pallets as $pallet)
-                                                <a href="#">{{$pallet->sn}}</a> <br>
+                                                <a href="#">{{$pallet->rfid}}</a> <br>
                                             @endforeach
                                         </td>
                                     </tr>

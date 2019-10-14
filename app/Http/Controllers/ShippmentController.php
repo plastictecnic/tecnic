@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Movement;
 use Illuminate\Http\Request;
 use App\Shippment;
 use Carbon\Carbon;
@@ -45,7 +46,7 @@ class ShippmentController extends Controller
         // Shippment created
         foreach($request->pallet_id as $pallet_id){
             $pallet = Pallet::find($pallet_id);
-            $pallet->status = 'shippment_created';
+            $pallet->status = 'OUT|shippment_created';
             $pallet->save();
         }
 
@@ -53,6 +54,61 @@ class ShippmentController extends Controller
         $shippment->pallets()->attach($request->pallet_id);
 
         return redirect()->back()->with('status', 'Shippment SN: ' . $sn . ' created successfuly');
+    }
+
+    public function storeApi(Request $r){
+        $data = explode(',', $r->pallet_id);
+
+        if($r->status == 'IN'){
+
+            for($i = 0; $i < sizeof($data); $i++){
+                Movement::create([
+                    'rfid' => $data[$i],
+                    'status' => $r->status,
+                    'remark' => $r->remark,
+                    'user_id' => $r->user_id
+                ]);
+            }
+
+            // update shipment returned
+        }else if($r->status == 'OUT'){
+
+            // Create shipment automated
+            $palletNo = \App\Shippment::whereDate('created_at', Carbon::today())->count() + 1;
+            $date = Carbon::today()->format('dmY');
+            $sn = 'S' . $date . str_pad($palletNo, 4, 0, STR_PAD_LEFT);
+
+            $organization = Organization::find(1);
+            $shippment = $organization->shippments()->create([
+                'vehicle_id' => 1,
+                'location_id' => 1,
+                'sn' => $sn,
+                'status' => 'created',
+                'created_by' => $r->user_id,
+                'delivvered_by' => 0,
+                'verified_by' => 0
+            ]);
+
+            for($i = 0; $i < sizeof($data); $i++){
+                Movement::create([
+                    'rfid' => $data[$i],
+                    'status' => $r->status,
+                    'remark' => $r->remark,
+                    'user_id' => $r->user_id
+                ]);
+
+                // Update pallet status
+                $pallet = Pallet::where('rfid', $data[$i])->get()->first();
+                $pallet->status = 'OUT|shippment_created';
+                $pallet->save();
+
+                // Attaching pallet to shippment
+                $shippment->pallets()->attach($pallet->id);
+            }
+        }else{
+            return response('NOT OK', 400);
+        }
+        return response('OK', 200);
     }
 
     public function track($id){

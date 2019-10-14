@@ -12,6 +12,20 @@ class OrganizationTableSeeder extends Seeder
      */
     public function run()
     {
+
+        // temp
+        Organization::create([
+            'company_name' => 'Plastictecnic Sdn. Bhd.',
+            'company_reg' => '30481-V',
+            'type' => 'temporary',
+            'address' => 'Lot 1, Jalan P/2A, Kawasan Perusahaan Pkt 1',
+            'postcode' => '43650',
+            'state' => 'Selangor',
+            'city' => 'Bandar Baru Bangi',
+            'fix_phone' => '0389256950',
+            'remark' => 'Internal Use'
+        ]);
+
         // Staff
         Organization::create([
             'company_name' => 'Plastictecnic Sdn. Bhd.',
