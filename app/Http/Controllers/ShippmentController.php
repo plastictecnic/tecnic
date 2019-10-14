@@ -48,6 +48,13 @@ class ShippmentController extends Controller
             $pallet = Pallet::find($pallet_id);
             $pallet->status = 'OUT|shippment_created';
             $pallet->save();
+
+            Movement::create([
+                'rfid' => $pallet->rfid,
+                'status' => 'OUT',
+                'remark' => 'MANUAL CREATE',
+                'user_id' => Auth::user()->id
+            ]);
         }
 
         // Attaching pallet to shippment
@@ -111,12 +118,13 @@ class ShippmentController extends Controller
         return response('OK', 200);
     }
 
+    // Doing consignment
     public function track($id){
         $shipment = Shippment::find($id);
-        return view('manager.shippment.track')->with('id', $id)->with('shipment', $shipment);
+        return view('manager.shippment.consignment')->with('id', $id)->with('shipment', $shipment);
     }
 
-    public function track_update(Request $request){
+    public function createConsignment(Request $request){
         $request->validate([
             'location' => 'required',
             'status' => 'required',
@@ -128,6 +136,7 @@ class ShippmentController extends Controller
         $ship->location_id = $request->location;
         $ship->status = $request->status;
         $ship->delivvered_by = Auth::user()->id;
+        $ship->verified_by = Auth::user()->id;
         $ship->save();
 
         foreach($ship->pallets as $pallet){
@@ -137,16 +146,7 @@ class ShippmentController extends Controller
             $p->save();
         }
 
-        return redirect()->back()->with('status', 'Shippment SN: ' . $ship->sn . ' updated successfuly');
+        return redirect()->back()->with('status', 'Shippment SN: ' . $ship->sn . ' consignment note successfuly');
 
-    }
-
-    public function verify(Request $request){
-        $request->validate(['s_id' => 'required']);
-        $ship = Shippment::find($request->s_id);
-        $ship->verified_by = Auth::user()->id;
-        $ship->save();
-
-        return redirect()->back()->with('status', 'Shippment SN: ' . $ship->sn . ' verified successfuly');
     }
 }

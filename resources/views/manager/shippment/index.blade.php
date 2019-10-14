@@ -86,7 +86,17 @@ Shippments - Plastictecknic Sdn. Bhd.
                                                 <a href="#">{{$pallet->rfid}}</a>
                                             @endforeach
                                         </td>
-                                        <td><a href="{{ route('track', ['id' => $shippment->id]) }}">Update</a></td>
+                                        <td>
+                                            <a class="btn btn-default" title="Consignment Note" href="{{ route('shippment-do-consignment', ['id' => $shippment->id]) }}">
+                                                <i class="material-icons">note</i>
+                                            </a>
+
+                                            &nbsp;
+
+                                            <a class="btn btn-info" title="Edit" href="{{ route('shippment-do-consignment', ['id' => $shippment->id]) }}">
+                                                <i class="material-icons">edit</i>
+                                            </a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
