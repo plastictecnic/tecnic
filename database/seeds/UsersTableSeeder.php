@@ -35,7 +35,7 @@ class UsersTableSeeder extends Seeder
             ]);
         }
 
-        $this->createUserRole('admin', 'ershad.sa@tecnic.com', 'staff');
+        $this->createUserRole('admin', 'ershad.sa@tecnic.com.my', 'staff');
         // $this->createUserRole('customer', 'fakemanyo@outlook.com', 'customer');
         // $this->createUserRole('manager', 'ershadahamed@ymail.com', 'staff');
         // $this->createUserRole('driver', 'carjunk9@hotmail.com', 'driver');
