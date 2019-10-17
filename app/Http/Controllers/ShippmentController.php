@@ -9,6 +9,9 @@ use Carbon\Carbon;
 use App\Organization;
 use Auth;
 use App\Pallet;
+use App\User as AppUser;
+use Illuminate\Foundation\Auth\User;
+use PDF;
 
 class ShippmentController extends Controller
 {
@@ -69,15 +72,28 @@ class ShippmentController extends Controller
         if($r->status == 'IN'){
 
             for($i = 0; $i < sizeof($data); $i++){
-                Movement::create([
-                    'rfid' => $data[$i],
-                    'status' => $r->status,
-                    'remark' => $r->remark,
-                    'user_id' => $r->user_id
-                ]);
+
+                // check if pallet in already or not
+                $stat = Pallet::where('rfid', $data[$i])->get()->first();
+
+                if($stat->status == 'IN' || $stat->status == 'CREATED|IN'){
+                    // Do nothing because we dont want enter duplicated data again
+                }else{
+                    // Update pallet movement
+                    Movement::create([
+                        'rfid' => $data[$i],
+                        'status' => $r->status,
+                        'remark' => $r->remark,
+                        'user_id' => $r->user_id
+                    ]);
+
+                    // Update pallet status
+                    $stat->status = 'IN';
+                    $stat->save();
+                }
             }
 
-            // update shipment returned
+            // update shipment returned - no need, shipment is one way
         }else if($r->status == 'OUT'){
 
             // Create shipment automated
@@ -97,17 +113,25 @@ class ShippmentController extends Controller
             ]);
 
             for($i = 0; $i < sizeof($data); $i++){
-                Movement::create([
-                    'rfid' => $data[$i],
-                    'status' => $r->status,
-                    'remark' => $r->remark,
-                    'user_id' => $r->user_id
-                ]);
 
-                // Update pallet status
                 $pallet = Pallet::where('rfid', $data[$i])->get()->first();
-                $pallet->status = 'OUT|shippment_created';
-                $pallet->save();
+
+                if($stat->status == 'OUT' || $stat->status == 'OUT|shippment_created'){
+                    // Do nothing because we dont want enter duplicated data again
+                }else{
+                    // chck pallet out already not
+                    Movement::create([
+                        'rfid' => $data[$i],
+                        'status' => $r->status,
+                        'remark' => $r->remark,
+                        'user_id' => $r->user_id
+                    ]);
+
+                    // Update pallet status
+
+                    $pallet->status = 'OUT|shippment_created';
+                    $pallet->save();
+                }
 
                 // Attaching pallet to shippment
                 $shippment->pallets()->attach($pallet->id);
@@ -121,32 +145,59 @@ class ShippmentController extends Controller
     // Doing consignment
     public function track($id){
         $shipment = Shippment::find($id);
-        return view('manager.shippment.consignment')->with('id', $id)->with('shipment', $shipment);
+        $staffs = Organization::where('type', 'staff')->get()->first();
+        $users = User::where('organization_id', $staffs->id)->get();
+
+        $drivers = Organization::where('type', 'driver')->get()->first();
+        $drivers = User::where('organization_id', $drivers->id)->get();
+        // \App\Organization::where('type', 'staff')->get()->first()->id
+        return view('manager.shippment.consignment')->with('id', $id)->with('shipment', $shipment)->with('users', $users)->with('drivers', $drivers);
     }
 
     public function createConsignment(Request $request){
         $request->validate([
             'location' => 'required',
+            'organization_id' => 'required',
+            'driver' => 'required',
             'status' => 'required',
+            'vehicle_id' => 'required',
+            'verified_by' => 'nullable',
             's_id' => 'required'
         ]);
 
         $ship = Shippment::find($request->s_id);
 
         $ship->location_id = $request->location;
+        $ship->organization_id = $request->organization_id;
+        $ship->vehicle_id = $request->vehicle_id;
         $ship->status = $request->status;
-        $ship->delivvered_by = Auth::user()->id;
-        $ship->verified_by = Auth::user()->id;
+        $ship->delivvered_by = $request->driver;
+        $ship->verified_by = $request->verified_by;
         $ship->save();
 
         foreach($ship->pallets as $pallet){
             $p = Pallet::find($pallet->id);
             $p->location_id = $request->location;
-            $p->status = $request->status;
             $p->save();
         }
 
-        return redirect()->back()->with('status', 'Shippment SN: ' . $ship->sn . ' consignment note successfuly');
+
+        $info = [
+            'ship' => $ship,
+            'customer' => $ship->organization->company_name,
+            'vehicle' => $ship->vehicle->type . ' - ' .$ship->vehicle->reg_number,
+            'total_pallets' => $ship->pallets->count(),
+            'pallets' => $ship->pallets,
+            'driver' => User::find($ship->delivvered_by)->name,
+            'verifier' => User::find($ship->verified_by)->name,
+        ];
+
+        // Generate pdf
+        $pdf = PDF::loadView('manager.shippment.pdf', $info);
+        $pdf->setPaper('a4', 'landscape');
+        return $pdf->download($ship->sn.'.pdf');
+
+        //return redirect()->back()->with('status', 'Shippment for SN: ' . $ship->sn . ' created consignment note successfuly');
 
     }
 }

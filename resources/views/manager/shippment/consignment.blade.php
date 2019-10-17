@@ -59,8 +59,11 @@ Create Consignment - Plastictecknic Sdn. Bhd.
                                         <select required name="location" class="form-control">
                                             <option value="">-- Please select location --</option>
                                             @foreach (\App\Location::all() as $location)
-                                            <option value="{{$location->id}}">
-                                                {{$location->code .' - '. $location->name}}</option>
+
+                                                <option value="{{$location->id}}" {{ $shipment->location_id == $location->id ? 'selected' : '' }}>
+                                                    {{$location->code .' - '. $location->name}}
+                                                </option>
+
                                             @endforeach
                                         </select>
                                     </div>
@@ -74,7 +77,21 @@ Create Consignment - Plastictecknic Sdn. Bhd.
                                         <select required name="organization_id" class="form-control">
                                             <option value="">-- Please select organization --</option>
                                             @foreach (\App\Organization::where('type', 'customer')->get() as $organization)
-                                            <option value="{{$organization->id}}">{{$organization->company_name}}</option>
+                                            <option {{ $shipment->organization_id == $organization->id ? 'selected' : '' }}  value="{{$organization->id}}">{{$organization->company_name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="material-icons">person</i>
+                                    </span>
+                                    <div class="form-line">
+                                        <select required name="driver" class="form-control">
+                                            <option value="">-- Please select driver --</option>
+                                            @foreach ($drivers as $driver)
+                                                <option {{ $shipment->delivvered_by == $driver->id ? 'selected' : '' }} value="{{$driver->id}}">{{$driver->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -88,8 +105,8 @@ Create Consignment - Plastictecknic Sdn. Bhd.
                                     <div class="form-line">
                                         <select required name="status" class="form-control">
                                             <option value="">-- Please select status --</option>
-                                            <option value="created">Created</option>
-                                            <option value="delivered">Delivered</option>
+                                            <option {{ $shipment->status == 'created' ? 'selected' : '' }} value="created">Created</option>
+                                            <option {{ $shipment->status == 'delivered' ? 'selected' : '' }} value="delivered">Delivered</option>
                                         </select>
                                     </div>
                                 </div>
@@ -102,8 +119,24 @@ Create Consignment - Plastictecknic Sdn. Bhd.
                                         <select required name="vehicle_id" class="form-control">
                                             <option value="">-- Please select vehicle --</option>
                                             @foreach (\App\Vehicle::all() as $vehicle)
-                                            <option value="{{$vehicle->id}}">
+                                            <option {{ $shipment->vehicle_id == $vehicle->id ? 'selected' : '' }} value="{{$vehicle->id}}">
                                                 {{$vehicle->type .' - '. $vehicle->reg_number}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="material-icons">person</i>
+                                    </span>
+                                    <div class="form-line">
+                                        <select name="verified_by" class="form-control">
+                                            <option value="">-- Verified by --</option>
+                                            @foreach ($users as $user)
+
+                                                <option {{ $shipment->verified_by == $user->id ? 'selected' : '' }} value="{{$user->id}}">{{$user->name}}</option>
+
                                             @endforeach
                                         </select>
                                     </div>
