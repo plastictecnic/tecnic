@@ -147,6 +147,9 @@ Create Consignment - Plastictecknic Sdn. Bhd.
                             <div class="col-lg-3 col-md-3 col-sm-3">
                                 <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">Create Consignment</button>
                             </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3">
+                                <a class="btn btn-block btn-lg bg-lime waves-effect" href="{{ route('shippment-delivered', $id) }}">Change to delivered</a>
+                            </div>
                         </div>
                     </form>
                 </div>

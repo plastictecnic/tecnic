@@ -61,6 +61,9 @@ Route::middleware(['auth'])->group(function(){
     Route::get('consignment/{id}', 'ShippmentController@track')->name('shippment-do-consignment');
     Route::post('create-consignment', 'ShippmentController@createConsignment')->name('shippment-create-consignment');
 
+    Route::get('shippment/{shippment}/delivered', 'ShippmentController@delivered')->name('shippment-delivered');
+
+
     // Pallet Management
     Route::get('pallet/all', 'PalletController@index')->name('pallet-all');
     Route::get('pallet/create', 'PalletController@create')->name('pallet-create');

@@ -16,7 +16,9 @@ use PDF;
 class ShippmentController extends Controller
 {
     public function index(){
-        return view('manager.shippment.index')->with('shippments', Shippment::all());
+        $created = Shippment::where('status', 'created')->get();
+        $delivered = Shippment::where('status', 'delivered')->get();
+        return view('manager.shippment.index')->with('shippments', $created)->with('delivered', $delivered);
     }
 
     public function create(){
@@ -89,6 +91,7 @@ class ShippmentController extends Controller
 
                     // Update pallet status
                     $stat->status = 'IN';
+                    $stat->location_id = 1;
                     $stat->save();
                 }
             }
@@ -116,7 +119,7 @@ class ShippmentController extends Controller
 
                 $pallet = Pallet::where('rfid', $data[$i])->get()->first();
 
-                if($stat->status == 'OUT' || $stat->status == 'OUT|shippment_created'){
+                if($pallet->status == 'OUT' || $pallet->status == 'OUT|shippment_created'){
                     // Do nothing because we dont want enter duplicated data again
                 }else{
                     // chck pallet out already not
@@ -130,6 +133,7 @@ class ShippmentController extends Controller
                     // Update pallet status
 
                     $pallet->status = 'OUT|shippment_created';
+                    $pallet->location_id = 3;
                     $pallet->save();
                 }
 
@@ -199,5 +203,20 @@ class ShippmentController extends Controller
 
         //return redirect()->back()->with('status', 'Shippment for SN: ' . $ship->sn . ' created consignment note successfuly');
 
+    }
+
+    public function delivered($shipment){
+        $d = Shippment::find($shipment);
+        $d->status = 'delivered';
+        $d->location_id = 4;
+        $d->save();
+
+        foreach($d->pallets as $p){
+            $pallet = Pallet::find($p->id);
+            $pallet->location_id = 4;
+            $pallet->save();
+        }
+
+        return redirect()->back()->with('status', 'Shippment for SN: ' . $d->sn . ' marked as delivered');
     }
 }
