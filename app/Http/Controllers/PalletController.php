@@ -44,10 +44,4 @@ class PalletController extends Controller
     {
         return DNS2D::getBarcodeHTML($code, "QRCODE");
     }
-
-    public function find_pallet(Request $req){
-        $req->validate(['rfid' => 'required']);
-        $pallet = Pallet::where('rfid', $req->rfid)->first();
-        return view('home')->with('pallet', $pallet);
-    }
 }

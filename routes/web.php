@@ -70,7 +70,6 @@ Route::middleware(['auth'])->group(function(){
     Route::post('pallet/store', 'PalletController@store')->name('pallet-store');
     Route::get('print-barcode/{code}', 'PalletController@print')->name('print-barcode');
     Route::get('print-barcode-2d/{code}', 'PalletController@print2D')->name('print-barcode-2d');
-    Route::post('find-pallet', 'PalletController@find_pallet')->name('find-pallet');
 });
 
 
