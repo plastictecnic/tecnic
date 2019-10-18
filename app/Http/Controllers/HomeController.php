@@ -47,7 +47,7 @@ class HomeController extends Controller
             $data[$counter] = [
                 'rfid' => $movement->rfid,
                 'total_usage' => $total_usage,
-                'location' => $pallet->location->code,
+                'location' => $pallet->location->name,
                 'remark' => $move_latest->remark,
                 'color' => $pallet->color
             ];
