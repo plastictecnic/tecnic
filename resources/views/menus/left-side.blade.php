@@ -36,6 +36,7 @@
                     <span>Home</span>
                 </a>
             </li>
+            @hasanyrole('admin|manager')
             <li class="{{ Route::is('pallet*') ? 'active' : '' }}">
                 <a href="{{route('pallet-all')}}">
                     <i class="material-icons">widgets</i>
@@ -48,6 +49,9 @@
                     <span>Shippment</span>
                 </a>
             </li>
+            @endhasanyrole
+
+            @hasanyrole('admin')
             <li class="{{ (Route::is('admin*') || Route::is('organization*')) ? 'active' : '' }}">
                 <a href="javascript:void(0);" class="menu-toggle">
                     <i class="material-icons">group</i>
@@ -62,6 +66,9 @@
                     </li>
                 </ul>
             </li>
+            @endhasanyrole
+
+            @hasanyrole('admin|manager')
             <li class="{{ Route::is('report*') ? 'active' : '' }}">
                 <a href="javascript:void(0);" class="menu-toggle">
                     <i class="material-icons">library_books</i>
@@ -90,6 +97,7 @@
                     </li>
                 </ul>
             </li>
+            @endhasanyrole
         </ul>
     </div>
     <!-- #Menu -->
