@@ -38,7 +38,7 @@
                                 <thead>
                                     <tr>
                                         <th>RFID</th>
-                                        <th>Status</th>
+                                        <th>Latest Remark</th>
                                         <th>Location</th>
                                         <th>Color</th>
                                         <th>Total Usage</th>
@@ -47,13 +47,24 @@
                                 <tfoot>
                                     <tr>
                                         <th>RFID</th>
-                                        <th>Status</th>
+                                        <th>Latest Remark</th>
                                         <th>Location</th>
                                         <th>Color</th>
                                         <th>Total Usage</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
+
+                                    @foreach ($datas as $k)
+                                        <tr>
+                                            <td>{{ $k->rfid }}</td>
+                                            <td>{{ $k->remark }}</td>
+                                            <td>{{ $k->location }}</td>
+                                            <td>{{ $k->color }}</td>
+                                            <td>{{ $k->total_usage }}</td>
+                                        </tr>
+                                    @endforeach
+
                                 </tbody>
                             </table>
                         </div>
