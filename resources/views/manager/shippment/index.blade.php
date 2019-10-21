@@ -90,9 +90,11 @@ Shippments - Plastictecknic Sdn. Bhd.
 
                                             &nbsp;
 
-                                            <a class="btn btn-info" title="Edit" href="{{ route('shippment-do-consignment', ['id' => $shippment->id]) }}">
+                                            @hasanyrole('admin')
+                                            <a class="btn btn-info" title="Edit" href="{{ route('shippment-edit', ['id' => $shippment->id]) }}">
                                                 <i class="material-icons">edit</i>
                                             </a>
+                                            @endhasanyrole
                                         </td>
                                     </tr>
                                 @endforeach

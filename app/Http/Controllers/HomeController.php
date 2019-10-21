@@ -32,6 +32,7 @@ class HomeController extends Controller
 
         $counter = 0;
         $total_usage = 0;
+        $data = array();
 
         foreach($movements as $movement){
             $pallet = Pallet::where('rfid', $movement->rfid)->get()->first();

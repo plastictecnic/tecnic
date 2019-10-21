@@ -54,7 +54,7 @@
                                     </tr>
                                 </tfoot>
                                 <tbody>
-
+                                    @if($datas != null)
                                     @foreach ($datas as $k)
                                         <tr>
                                             <td>{{ $k->rfid }}</td>
@@ -64,6 +64,7 @@
                                             <td>{{ $k->total_usage }}</td>
                                         </tr>
                                     @endforeach
+                                    @endif
 
                                 </tbody>
                             </table>

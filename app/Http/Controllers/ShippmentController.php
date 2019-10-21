@@ -52,6 +52,7 @@ class ShippmentController extends Controller
         foreach($request->pallet_id as $pallet_id){
             $pallet = Pallet::find($pallet_id);
             $pallet->status = 'OUT|shippment_created';
+            $pallet->location_id = 3;
             $pallet->save();
 
             Movement::create([
@@ -218,5 +219,55 @@ class ShippmentController extends Controller
         }
 
         return redirect()->back()->with('status', 'Shippment for SN: ' . $d->sn . ' marked as delivered');
+    }
+
+    public function edit($id){
+        return view('manager.shippment.edit')->with('shippment', Shippment::find($id));
+    }
+
+    public function update(Request $request, $id){
+        $remove = $request->pallets_r;
+        $add = $request->pallet_id;
+        $ship = Shippment::find($id);
+
+        // detach removed
+        if($remove != null){
+            
+            for($i = 0; $i < sizeof($remove); $i++){
+                $pallet = Pallet::find($remove[$i]);
+                $pallet->status = 'IN';
+                $pallet->location_id = 1;
+                $pallet->save();
+
+                // delete movement
+                $m = Movement::where('rfid', $pallet->rfid)->where('status', 'OUT')->latest()->first();
+                $m->delete();
+            }
+
+            // Attaching pallet to shippment
+            $ship->pallets()->detach($remove);
+        }
+
+        // attach added
+        if($add != null){
+            for($i = 0; $i < sizeof($add); $i++){
+                $pallet = Pallet::find($add[$i]);
+                $pallet->status = 'OUT|shippment_created';
+                $pallet->location_id = 3;
+                $pallet->save();
+
+                Movement::create([
+                    'rfid' => $pallet->rfid,
+                    'status' => 'OUT',
+                    'remark' => 'MANUAL CREATE|UPD',
+                    'user_id' => Auth::user()->id
+                ]);
+
+                // Attaching pallet to shippment
+                $ship->pallets()->attach($add[$i]);
+            }
+        }
+
+        return redirect()->back()->with('status', 'Shippment updated successfully');
     }
 }

@@ -52,7 +52,7 @@ Route::middleware(['auth'])->group(function(){
         // Location
         Route::resource('location', 'LocationController');
 
-        // // Vehicle
+        // Vehicle
         Route::resource('vehicle', 'VehichleController');
 
         // Shipment Management
@@ -65,6 +65,8 @@ Route::middleware(['auth'])->group(function(){
 
         Route::get('shippment/{shippment}/delivered', 'ShippmentController@delivered')->name('shippment-delivered');
 
+        Route::get('shipment/{id}/edit', 'ShippmentController@edit')->name('shippment-edit');
+        Route::post('shippment-update/{id}', 'ShippmentController@update')->name('shippment-update');
 
         // Pallet Management
         Route::get('pallet/all', 'PalletController@index')->name('pallet-all');
