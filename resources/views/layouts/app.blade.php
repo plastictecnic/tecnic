@@ -56,7 +56,7 @@
                     <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse"
                         data-target="#navbar-collapse" aria-expanded="false"></a>
                     <a href="javascript:void(0);" class="bars"></a>
-                    <a class="navbar-brand" href="{{route('home')}}"><img style="display:inline;" width="30px" src="{{asset('images/logo.png')}}" alt=""> PLASTICTECNIC SDN. BHD. <small>REG: 30481-V</small></a>
+                    <a class="navbar-brand" href="{{route('home')}}"><img style="display:inline;" width="30px" src="{{asset('images/logo.png')}}" alt=""> PLASTICTECNIC SDN. BHD. <small>REG: 197601004542 (30481-V)</small></a>
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
