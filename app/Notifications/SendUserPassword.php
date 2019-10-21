@@ -45,7 +45,7 @@ class SendUserPassword extends Notification
         return (new MailMessage)
                     ->line('This your application password.')
                     ->line('Password: ' . $this->randomString)
-                    ->line('Login at : <a target="_blank" href="https://ptis.plastictecnic.com">Plastictecnic (M) Sdn. Bhd.</a>')
+                    ->line('Login at : https://ptis.plastictecnic.com')
                     ->line('Thank you for using our application!');
     }
 
