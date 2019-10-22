@@ -51,6 +51,30 @@
             </li>
             @endhasanyrole
 
+            @hasanyrole('admin|manager')
+            <li class="{{ Route::is('report*') ? 'active' : '' }}">
+                <a href="{{ route('report-pallet') }}">
+                    <i class="material-icons">report</i>
+                    <span>Pallet Summary</span>
+                </a>
+            </li>
+
+            <li class="{{ (Route::is('location*') || Route::is('vehicle*')) ? 'active' : '' }}">
+                <a href="javascript:void(0);" class="menu-toggle">
+                    <i class="material-icons">settings</i>
+                    <span>Others</span>
+                </a>
+                <ul class="ml-menu">
+                    <li class="{{ Route::is('vehicle*') ? 'active' : '' }}">
+                        <a href="{{route('vehicle.index')}}">Vehicle</a>
+                    </li>
+                    <li class="{{ Route::is('location*') ? 'active' : '' }}">
+                        <a href="{{route('location.index')}}">Location</a>
+                    </li>
+                </ul>
+            </li>
+            @endhasanyrole
+
             @hasanyrole('admin')
             <li class="{{ (Route::is('admin*') || Route::is('organization*')) ? 'active' : '' }}">
                 <a href="javascript:void(0);" class="menu-toggle">
@@ -63,37 +87,6 @@
                     </li>
                     <li class="{{ Route::is('organization*') ? 'active' : '' }}">
                         <a href="{{route('organization.index')}}">Organization</a>
-                    </li>
-                </ul>
-            </li>
-            @endhasanyrole
-
-            @hasanyrole('admin|manager')
-            <li class="{{ Route::is('report*') ? 'active' : '' }}">
-                <a href="javascript:void(0);" class="menu-toggle">
-                    <i class="material-icons">library_books</i>
-                    <span>Reports</span>
-                </a>
-                <ul class="ml-menu">
-                    <li class="{{ Route::is('report-shipment') ? 'active' : '' }}">
-                        <a href="{{route('report-shipment')}}">Shipments</a>
-                    </li>
-                    <li class="{{ Route::is('report-pallet') ? 'active' : '' }}">
-                        <a href="{{route('report-pallet')}}">Pallets</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="{{ (Route::is('location*') || Route::is('vehicle*')) ? 'active' : '' }}">
-                <a href="javascript:void(0);" class="menu-toggle">
-                    <i class="material-icons">settings</i>
-                    <span>Others</span>
-                </a>
-                <ul class="ml-menu">
-                    <li class="{{ Route::is('vehicle*') ? 'active' : '' }}">
-                        <a href="{{route('vehicle.index')}}">Vehicle</a>
-                    </li>
-                    <li class="{{ Route::is('location*') ? 'active' : '' }}">
-                        <a href="{{route('location.index')}}">Location</a>
                     </li>
                 </ul>
             </li>

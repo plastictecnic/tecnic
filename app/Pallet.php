@@ -11,7 +11,7 @@ class Pallet extends Model
     ];
 
     public function shippments(){
-        return $this->belongsToMany('App\Shippment');
+        return $this->belongsToMany('App\Shippment', 'pallet_shippment')->withTimestamps();
     }
 
     public function location(){

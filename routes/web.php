@@ -26,11 +26,6 @@ Route::middleware(['auth'])->group(function(){
     // Update Password
     Route::post('/change-password', 'ProfileController@updatePassword')->name('change-password');
 
-    // Report
-    Route::get('pallet-report', 'ReportController@pallet')->name('report-pallet');
-    Route::get('shipment-report', 'ReportController@shipment')->name('report-shipment');
-    Route::get('text', 'ReportController@test')->name('test');
-
     // Admin only
     Route::group(['middleware' => ['role:admin']], function () {
         // User Management
@@ -74,6 +69,10 @@ Route::middleware(['auth'])->group(function(){
         Route::post('pallet/store', 'PalletController@store')->name('pallet-store');
         Route::get('print-barcode/{code}', 'PalletController@print')->name('print-barcode');
         Route::get('print-barcode-2d/{code}', 'PalletController@print2D')->name('print-barcode-2d');
+
+        // Report
+        Route::get('pallet/summary', 'ReportController@pallet')->name('report-pallet');
+        Route::post('pallet/summary', 'ReportController@generate')->name('report-pallet-generate');
     });
 });
 

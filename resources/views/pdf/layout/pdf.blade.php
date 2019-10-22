@@ -100,9 +100,7 @@
 
         @yield('content')
 
-        <div class="footer">
-            
-        </div>
+        
 
     </section>
 
