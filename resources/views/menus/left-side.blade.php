@@ -30,12 +30,15 @@
     <div class="menu">
         <ul class="list">
             <li class="header">MAIN NAVIGATION</li>
+            @hasanyrole('admin|manager|driver')
             <li class="{{ Route::is('home') ? 'active' : '' }}">
                 <a href="{{route('home')}}">
                     <i class="material-icons">home</i>
                     <span>Home</span>
                 </a>
             </li>
+            @endhasanyrole
+
             @hasanyrole('admin|manager')
             <li class="{{ Route::is('pallet*') ? 'active' : '' }}">
                 <a href="{{route('pallet-all')}}">
@@ -51,11 +54,36 @@
             </li>
             @endhasanyrole
 
+            @hasanyrole('customer')
+            <li class="{{ Route::is('by-customer') ? 'active' : '' }}">
+                <a href="{{route('by-customer')}}">
+                    <i class="material-icons">local_shipping</i>
+                    <span>My Shipment</span>
+                </a>
+            </li>
+            @endhasanyrole
+
+            @hasanyrole('driver')
+            <li class="{{ Route::is('by-driver') ? 'active' : '' }}">
+                <a href="{{route('by-driver')}}">
+                    <i class="material-icons">local_shipping</i>
+                    <span>My Shipment</span>
+                </a>
+            </li>
+            @endhasanyrole
+
             @hasanyrole('admin|manager')
             <li class="{{ Route::is('report*') ? 'active' : '' }}">
                 <a href="{{ route('report-pallet') }}">
                     <i class="material-icons">report</i>
                     <span>Pallet Summary</span>
+                </a>
+            </li>
+
+            <li class="{{ Route::is('customer*') ? 'active' : '' }}">
+                <a href="{{ route('customer-select') }}">
+                    <i class="material-icons">group_work</i>
+                    <span>Cust Shipment</span>
                 </a>
             </li>
 

@@ -73,6 +73,20 @@ Route::middleware(['auth'])->group(function(){
         // Report
         Route::get('pallet/summary', 'ReportController@pallet')->name('report-pallet');
         Route::post('pallet/summary', 'ReportController@generate')->name('report-pallet-generate');
+
+        // Selected shipment
+        Route::get('select/customer', 'Customer\CustomerController@index')->name('customer-select');
+        Route::post('select/customers', 'Customer\CustomerController@displaySelectedCustomer')->name('customer-shipments');
+    });
+
+    // Customer
+    Route::group(['middleware' => ['role:customer']], function () {
+        Route::get('customer/shipment', 'Customer\CustomerController@customer')->name('by-customer');
+    });
+
+    // Driver
+    Route::group(['middleware' => ['role:driver']], function () {
+        Route::get('driver/shipment', 'Customer\CustomerController@driver')->name('by-driver');
     });
 });
 
