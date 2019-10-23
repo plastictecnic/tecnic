@@ -15,7 +15,6 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['role:admin|manager|driver']);
     }
 
     /**
@@ -25,6 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $this->middleware(['role:admin|manager|driver']);
 
         // Get only single rfid no duplicate
         $movements = Movement::where('status', 'IN')->distinct()->get(['rfid']);
