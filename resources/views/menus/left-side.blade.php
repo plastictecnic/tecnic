@@ -49,7 +49,7 @@
             <li class="{{ Route::is('shippment*') ? 'active' : '' }}">
                 <a href="{{route('shippment-all')}}">
                     <i class="material-icons">local_shipping</i>
-                    <span>Shippment</span>
+                    <span>Shipment</span>
                 </a>
             </li>
             @endhasanyrole

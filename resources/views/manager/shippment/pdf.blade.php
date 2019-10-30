@@ -90,7 +90,7 @@
                 <p>{{$verifier}}</p>
             </td>
             <td class="p-2" width="33%">
-                    <p>Customer Acknowladgment:</p>
+                    <p>Customer Acknowledgement:</p>
                 <hr>
                 <p>Cop & Name:</p>
                     <p>Date & Time :</p>

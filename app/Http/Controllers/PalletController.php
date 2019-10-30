@@ -33,7 +33,7 @@ class PalletController extends Controller
             'color' => $request->color
         ]);
 
-        return redirect()->back()->with('status', 'Pallet RFID: ' . $rfid . ' created successfuly');
+        return redirect()->back()->with('status', 'Pallet RFID: ' . $request->rfid . ' created successfuly');
     }
 
     public function print($code){
