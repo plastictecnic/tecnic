@@ -88,6 +88,6 @@ Route::middleware(['auth'])->group(function(){
     Route::group(['middleware' => ['role:driver']], function () {
         Route::get('driver/shipment', 'Customer\CustomerController@driver')->name('by-driver');
     });
+
+
 });
-
-

@@ -26,6 +26,9 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+
+        $schedule->call('App\Http\Controllers\PalletController@emailReport')->everyMinute();
+        // $schedule->call('App\Http\Controllers\PalletController@emailReport')->monthlyOn(1, '00:00');
     }
 
     /**
