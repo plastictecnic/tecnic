@@ -114,9 +114,7 @@ class ShippmentController extends Controller
                 'created_by' => $r->user_id,
                 'delivvered_by' => 0,
                 'verified_by' => 0
-            ]);
-
-            for($i = 0; $i < sizeof($data); $i++){
+            ]);wa); $i++){
 
                 $pallet = Pallet::where('rfid', $data[$i])->get()->first();
 
@@ -144,6 +142,7 @@ class ShippmentController extends Controller
         }else{
             return response('NOT OK', 400);
         }
+
         return response('OK', 200);
     }
 
@@ -232,7 +231,7 @@ class ShippmentController extends Controller
 
         // detach removed
         if($remove != null){
-            
+
             for($i = 0; $i < sizeof($remove); $i++){
                 $pallet = Pallet::find($remove[$i]);
                 $pallet->status = 'IN';

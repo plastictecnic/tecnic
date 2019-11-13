@@ -101,8 +101,8 @@ class PalletController extends Controller
         $pdf->save(storage_path('app/public/reports/'.$file));
 
         // $data['email'] = 'ershad.sa@tecnic.com.my';
-        // $data['email'] = 'ptis_report@tecnic.com.my';
-        $data['email'] = 'it_all@tecnic.com.my';
+        $data['email'] = 'ptis_report@tecnic.com.my';
+        // $data['email'] = 'it_all@tecnic.com.my';
         $data['path'] = 'public/reports/'.$file;
 
         Mail::to($data['email'])->send(new SendMonthlyReport($data));
