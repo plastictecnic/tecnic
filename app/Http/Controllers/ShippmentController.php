@@ -116,7 +116,7 @@ class ShippmentController extends Controller
                 'verified_by' => 0
             ]);
 
-            for($i = 0; $i < sizeof($data); $i++)
+            for($i = 0; $i < sizeof($data); $i++){
 
                 $pallet = Pallet::where('rfid', $data[$i])->get()->first();
 
