@@ -10,6 +10,7 @@ use App\Organization;
 use Auth;
 use App\Pallet;
 use App\User as AppUser;
+use App\Vehicle;
 use Illuminate\Foundation\Auth\User;
 use PDF;
 
@@ -171,7 +172,16 @@ class ShippmentController extends Controller
             's_id' => 'required'
         ]);
 
+        // do quantity verify
+        $v = Vehicle::find($request->vehicle_id);
+        $quantity = $v->quantity;
+
         $ship = Shippment::find($request->s_id);
+
+        // dd($ship->pallets->count() .' - '. $quantity);
+        if($ship->pallets->count() > $quantity){
+            return redirect()->back()->with('inf', 'Cannot create consignment. Pallet over than the limit allowed');
+        }
 
         $ship->location_id = $request->location;
         $ship->organization_id = $request->organization_id;

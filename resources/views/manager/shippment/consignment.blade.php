@@ -19,6 +19,12 @@ Create Consignment - Plastictecknic Sdn. Bhd.
                     {{ session('status') }}
                 </div>
                 @endif
+
+                @if (session('inf'))
+                <div class="alert alert-danger" role="alert">
+                    {{ session('inf') }}
+                </div>
+                @endif
             </div>
         </div>
     </div>

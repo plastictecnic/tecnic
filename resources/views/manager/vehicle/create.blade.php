@@ -102,7 +102,20 @@ Vehicle - Plastictecknic Sdn. Bhd.
                                     <option value="lorry">Lorry</option>
                                     <option value="car">Car</option>
                                     <option value="van">Van</option>
+                                    <option value="container">Container</option>
                                 </select>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">system_update_alt</i>
+                            </span>
+                            <div class="form-line">
+                                <input id="quantity" type="tel"
+                                    class="form-control @error('quantity') is-invalid @enderror" name="quantity"
+                                    value="{{ old('quantity') ? old('quantity') : '24' }}" placeholder="Max Pallet Quantity" required
+                                    autocomplete="quantity">
                             </div>
                         </div>
 

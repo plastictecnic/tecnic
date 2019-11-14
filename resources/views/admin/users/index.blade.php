@@ -39,7 +39,6 @@ Users - Plastictecknic Sdn. Bhd.
                             </a>
                             <ul class="dropdown-menu pull-right">
                                 <li><a href="{{route('admin-xadd-user')}}">Add User</a></li>
-                                <li><a href="javascript:void(0);">Full detail PDF</a></li>
                             </ul>
                         </li>
                     </ul>

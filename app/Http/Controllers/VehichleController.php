@@ -36,10 +36,11 @@ class VehichleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'reg_number' => 'required|max:20',
+            'reg_number' => 'required|max:10',
             'type' => 'required|max:20',
             'driver_name' => 'required|max:20',
-            'hp' => 'required|digits_between:10,12'
+            'hp' => 'required|digits_between:10,12',
+            'quantity' => 'required|digits_between:2,3'
         ]);
 
         Vehicle::create($request->all());

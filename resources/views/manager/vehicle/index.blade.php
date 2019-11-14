@@ -52,7 +52,6 @@ Vehicles - Plastictecknic Sdn. Bhd.
                                     <th>Veh. Reg</th>
                                     <th>Type</th>
                                     <th>H. Phone</th>
-                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tfoot>
@@ -61,7 +60,6 @@ Vehicles - Plastictecknic Sdn. Bhd.
                                     <th>Veh. Reg</th>
                                     <th>Type</th>
                                     <th>H. Phone</th>
-                                    <th>Action</th>
                                 </tr>
                             </tfoot>
                             <tbody>
@@ -71,7 +69,6 @@ Vehicles - Plastictecknic Sdn. Bhd.
                                     <td>{{$vehicle->reg_number}}</td>
                                     <td>{{$vehicle->type}}</td>
                                     <td>{{$vehicle->hp}}</td>
-                                    <td><a href="edit">Edit</a></td>
                                 </tr>
                                 @endforeach
                             </tbody>
