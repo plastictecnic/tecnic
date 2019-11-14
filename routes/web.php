@@ -74,6 +74,9 @@ Route::middleware(['auth'])->group(function(){
         Route::get('pallet/summary', 'ReportController@pallet')->name('report-pallet');
         Route::post('pallet/summary', 'ReportController@generate')->name('report-pallet-generate');
 
+        // Download monthly report
+        Route::get('pallet/download/summary', 'PalletController@downloadReport')->name('report-monthly-pallet');
+
         // Selected shipment
         Route::get('select/customer', 'Customer\CustomerController@index')->name('customer-select');
         Route::post('select/customers', 'Customer\CustomerController@displaySelectedCustomer')->name('customer-shipments');
