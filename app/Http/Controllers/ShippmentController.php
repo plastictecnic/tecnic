@@ -94,8 +94,8 @@ class ShippmentController extends Controller
 
                     // Update pallet status
                     $stat->status = 'IN';
-                    $stat->location_id = Location::where('code', 'WH01')->get()->first()->id;
-                    // $stat->location_id = 1;
+                    // $stat->location_id = Location::where('code', 'WH01')->get()->first()->id;
+                    $stat->location_id = 1;
                     $stat->save();
                 }
             }
